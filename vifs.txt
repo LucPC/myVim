@@ -1,0 +1,120 @@
+     								Vi For Smarties
+
+1. Basic Concepts
+
+  a.  Start by typing vi followed by the file(s) you want to edit.
+  b.  Example: vi one.txt two.txt etc.txt
+  c.  There are two modes: command mode and insert mode. You will begin in command mode. (Unless you have a config file which changes this. Rare.)
+  d.  Hitting the Esc key always puts you in command mode.
+  e.  It never takes you out of command mode.
+  f.  Commands only work in command mode. Get used to hitting Esc a lot.
+  g.  Esc is your friend. If you begin to issue a command and then change your mind, always hit Esc a few times to cancel.
+  h.  Remember: ALL COMMANDS ARE CASE-SENSITIVE!!!
+
+2. Basic Editing Commands
+
+   a. Hitting i or a from command mode puts you in insert mode. i starts inserting text before the cursor. a starts appending text after the cursor.
+   b. Use h j k l to move left, down, up, and right, respectively.
+   c. Use w e b to move forward one word, forward to the next end of a word, and back one word, respectively.
+   d. Use x to delete one character, dw to delete one word, or dd to delete one whole line.
+   e. Use a number before a command to repeat the command that many times.
+   f. Example: 3dw deletes three words starting from the current cursor position.
+   g. u (lowercase) means undo the last change.
+   h. ZZ (uppercase) saves any changes and quits.
+   i. :q! abandons any changes and quits.
+
+3. Cut and Paste
+
+   a. yy yanks the current line into the buffer. This is like copying the current line to the clipboard.
+   b. Example: 3yy yanks three lines into the buffer starting with the current one.
+   c. p (lowercase) pastes the buffer contents to the line under the current one.
+   d. P (uppercase) Pastes the buffer contents to the line above the current one.
+   e. Lines deleted with dd also end up in the buffer and can be pasted.
+   f. Words deleted with dw also end up in the buffer and can be pasted.
+
+3.1 Advanced Cut and Paste
+
+   a. There are 26 lettered buffers, labeled from a to z (lowercase), in addition to the usual "clipboard" one.
+   b. Lettered buffers are accessed with the " double quote.
+   c. Example: "a3yy yanks three lines into the a buffer starting with the current one.
+   d. Example: "bp pastes the contents of buffer b to the line under the current one.
+
+4. Going to a Line or Column
+
+    a. Type a number followed by G (uppercase) to go to that line number.
+    Example: 24G goes to line 24.
+    Example: G goes to the last line of the buffer.
+    b. Type a number followed by | (pipe) to go to that column in the current line.
+    Example: 40| goes to column 40.
+
+5. Repeat the Last Action
+
+   a. Use . (period) to repeat the last action.
+   b. Example: If you hit i to insert, then type "hello world" followed by the Esc key to enter command mode, then move to another line and hit . to repeat, the words "hello world" will appear before the current cursor position.
+
+6. Search for a String
+
+   a. Use / (foward slash) followed by a string to search for that string.
+    Example: /foobar would find the first occurrence of foobar after the cursor position. It would also find, for example, something like foobariciousness.
+    After the first occurrence of the string is found, use n (lowercase) to find the next occurrence. Continue hitting n as needed.
+   b. Use N (uppercase) to find the previous occurrence of the string.
+   c. Use ? (question mark) followed by a string to search backwards through the file for that string.
+
+7. Colon Commands (Ed/Ex Commands)
+
+   a. Use : (colon) in command mode before entering complex commands.
+    Example: :%s/foo/bar/g replaces all occurrences of foo with bar in the entire file.
+    Example: :set nu displays line numbers.
+    Example: :set nonu cancels line number display.
+    Example: :1,8d deletes lines 1 through 8 inclusive.
+
+7.1 Useful Colon Commands
+
+   a. Use :set wm=8 to make text wrap around to a new line if it goes beyond column 72 of the current line. (80-8=72) The 8 can be some other value if you wish, of course.
+    Use :set ts=4 to set the number of spaces used to display the tab character to 4. The 4 can be some other value if you wish.
+    Use :set ic to make string searches with / ignore cases.
+    Example: After :set ic using /foobar will find foobar as well as FooBaR.
+
+7.2 Marking Text Regions
+
+   a. Use ma to mark the current line as a, mb to mark as b and etc. The a can be any letter from a to z. The line can then be referenced by using 'a (single quote followed by a or appropriate letter).
+    Example: 'a goes to the line marked as a.
+    Marked lines can be used in colon commands.
+    Example: :'a,'b d deletes all lines from the line marked as a to the line marked as b, inclusive.
+
+7.3 Other Useful Colon Commands
+
+   a. Use :w newfile.txt to save to a new file called newfile.txt.
+   b. Use :set all to find out the value of all options set.
+   c. Use :8,16 co 32 to copy lines 8 through 16 to the spot after line 32.
+   d. Use :8,16 m 32 to move lines 8 through 16 to the spot after line 32.
+   e. If you have multiple files open for editing, use :n to go the next file in the sequence. If you are at the end of the sequence, use :rew to rewind to the beginning and start again with the first file in the sequence.
+   fe Use :args to list all the open files in order.
+
+8. Useful Tricks
+
+   a. G by itself goes to the last line of the file.
+   b. ~ (tilde) toggles the case of the character under the cursor.
+   c. When deleting blocks of text, move to the first line of the block, type ma to mark it, then move to the last line of the block and type d'a to delete the block.
+   d. Use the above trick with y'a to yank blocks of text.
+
+9. Useful Symbols
+
+   a. Outside a colon command, $ stands for the end of the current line.
+   b. Inside a colon command, $ stands for the last line in the file.
+   Example: $ goes to the end of the current line.
+   Example: d$ deletes from the cursor to the end of the current line.
+   Example: :$ goes to the last line in the file.
+   Example: :24,$ d deletes everything from line 24 through the last line in the file, inclusive.
+   g. Outside a colon command, 0 (zero) stands for the beginning of the current line.
+   h. Inside a colon command, 0 (zero) stands for line 0, or the line that is going to be created above the first line in the file.
+   i. Example: 0 goes to the beginning of the current line.
+   j. Example: :10,20 m 0 moves lines 10 through 20, inclusive, above the first line of the file.
+
+Shell Operations
+
+   a. Use :!command to execute command without leaving Vi.
+    Example: :!date will execute the shell command date and display its output.
+   b. Use :sh to spawn a new command shell inside Vi.
+   c. Use exit to leave that shell when done.
+

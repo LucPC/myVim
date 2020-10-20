@@ -1,0 +1,34 @@
+Lesson 1
+
+1.
+pwd - Print directory (shows where we are)
+
+2.
+ls - show the content of a selected folder 
+We can restrict the content showed by adding the name of the file we are looking for, we can also use wild cards (??), by doing for example, ls b??k on a folder that have files named book, bulk and brook. the ls search will return only book and bulk files.
+
+3. 
+cd/rm/mv/cp/mkdir
+
+cd- change directory - double tab to see where to go while navigating on directories trough terminal.
+
+mv comand can be used to change files name (ex: mv a.txt b.txt) and to move files to a diferent directory (mv a.txt Downloads).
+
+cp is used to copy a file (cp  a.txt b.txt it will copie the content of a to b), also (cp a.txt ~/Downloads) will make a copy of a .txt on Downloads directory.
+
+If we need to copy an directory with other directories inside, we need to use cp -r command, otherwise it will only copy the directory and it's files. Also we can use -rf to force the r comand if necessary.
+
+the -r command is necessary to remove folders.
+
+mkdir to makes directories
+
+if we want to make remove, move, copy... all the file of a certain extension we can use *.extension. (ex: rm *.doc) as result we will remove all the files of .doc extension
+
+
+4.
+ctrl+r to check the history commands
+type (history -c) to clear
+
+5.
+Combining commands
+ex:we can use (touch a.txt && vim a.txt) as reusult we will create the file as we start to edit that same file on Vim.
